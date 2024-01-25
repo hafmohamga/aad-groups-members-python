@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Generate 12 RSA key pairs 
+for i in {1..12}
+do
+   openssl genrsa -out rsa_key_$i.pem 2048
+   openssl pkcs8 -topk8 -inform PEM -out rsa_key_$i.p8 -in rsa_key_$i.pem -nocrypt 
+done
+
+# Zip all the keys to share them easily
+zip keys.zip rsa_key_*
